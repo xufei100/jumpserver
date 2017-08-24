@@ -139,8 +139,12 @@ class ProductionConfig(Config):
 
 
 class DockerConfig(Config):
-    DB_ENGINE = 'sqlite'
-    DB_NAME = os.path.join(BASE_DIR, 'data', 'db.sqlite3')
+    DB_ENGINE = os.environ.get('DB_ENGINE') or 'sqlite'
+    DB_HOST = os.environ.get('DB_HOST') or '127.0.0.1'
+    DB_PORT = os.environ.get('DB_PORT') or '3306'
+    DB_USER = os.environ.get('DB_USER') or 'root'
+    DB_PASSWORD = os.environ.get('DB_PASSWORD') or ''
+    DB_NAME = os.environ.get('DB_NAME') or os.path.join(BASE_DIR, 'data', 'db.sqlite3')
     REDIS_HOST = os.environ.get('REDIS_HOST') or 'redis'
     EMAIL_HOST = os.environ.get('EMAIL_HOST') or 'smtp.qq.com'
     EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 465))
