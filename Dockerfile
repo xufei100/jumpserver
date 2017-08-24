@@ -10,6 +10,8 @@ RUN cd requirements && yum -y install $(cat rpm_requirements.txt)
 RUN cd requirements && pip install -r requirements.txt
 RUN yum clean all
 
+RUN pip install MySQLdb && pip install MySQL-python
+
 RUN rm -f data/db.sqlite3
 RUN rm -r .git
 RUN rm -f config.py
