@@ -10,11 +10,11 @@ RUN cd requirements && yum -y install $(cat rpm_requirements.txt)
 RUN cd requirements && pip install -r requirements.txt
 RUN yum clean all
 
-RUN pip install mysqlclient && pip install MySQL-python
+RUN yum install -y python-devel mysql-devel python3-devel &&  pip install mysqlclient
 
 RUN rm -f data/db.sqlite3
-RUN rm -r .git
-RUN rm -f config.py
+#RUN rm -r .git
+#RUN rm -f config.py
 
 VOLUME /opt/jumpserver/data
 VOLUME /opt/jumpserver/logs
